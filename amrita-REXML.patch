@@ -1,0 +1,13 @@
+diff -ur amrita-1.8.2-orig/lib/amrita/xml.rb amrita-1.8.2/lib/amrita/xml.rb
+--- amrita-1.8.2-orig/lib/amrita/xml.rb	2003-02-05 07:02:00.000000000 -0700
++++ amrita-1.8.2/lib/amrita/xml.rb	2004-02-01 15:27:45.148146416 -0700
+@@ -100,7 +100,7 @@
+ 
+     def XMLParser.parse_file(fname, dummy=nil, ep=DefaultElementProcessor)
+       l = Listener.new(ep) 
+-      REXML::Document.parse_stream(REXML::File.new(fname), l)
++      REXML::Document.parse_stream(File.open(fname), l)
+       l.result
+     end
+   end
+Only in amrita-1.8.2/lib/amrita: xml.rb~
