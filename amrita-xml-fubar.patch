@@ -1,0 +1,83 @@
+diff -ur o-amrita-1.0.2/lib/amrita/xml.rb amrita-1.0.2/lib/amrita/xml.rb
+--- o-amrita-1.0.2/lib/amrita/xml.rb	2005-04-01 00:58:59.718350000 -0700
++++ amrita-1.0.2/lib/amrita/xml.rb	2005-04-01 01:57:46.057114611 -0700
+@@ -3,13 +3,16 @@
+ require "rexml/streamlistener"
+ 
+ module Amrita
++  
+   has_uconv = true
++  
+   begin
+     require 'uconv'
+   rescue LoadError
+     has_uconv = false
+   end
+-  if has_uconv 
++  
++  if has_uconv
+     case $KCODE
+     when "EUC"
+       def convert(s)
+@@ -34,12 +37,12 @@
+     include Amrita
+     include REXML::StreamListener
+ 
+-
+-    def initialize
++    def initialize(&block)
+       @stack = [ Null ]
++			@block = block
+     end
+ 
+-    def push(element)      
++    def push(element)
+       @stack.unshift element
+     end
+ 
+@@ -57,10 +60,11 @@
+     end
+ 
+     def tag_start(name, attrs)
+-      a = attrs.collect do |key, val|
++      a = attrs.collect { |key, val|
+         Attr.new(key, convert(val))
+-      end
+-      push e(name, *a)
++      }
++			t = @block.call(e(name, *a))
++      push t
+       push Null
+     end
+ 
+@@ -83,23 +87,25 @@
+     end
+ 
+     def doctype(name, pub_sys, long_name, uri)
+-      s = SpecialElement.new('!',
+-                             %Q[DOCTYPE #{name} #{pub_sys} #{long_name} #{uri}])
++      s = SpecialElement.new('!', %Q[DOCTYPE #{name} #{pub_sys} #{long_name} #{uri}])
+       push(pop + s)
+     end
+   end
+ 
+   module XMLParser
+     def XMLParser.parse_text(text, fname="", lno=0, dummy=nil, &block)
+-      l = Listener.new(&block) 
++      l = Listener.new(&block)
+       REXML::Document.parse_stream(text, l)
+       l.result
+     end
+ 
+     def XMLParser.parse_file(fname, dummy=nil, &block)
+-      l = Listener.new(&block) 
+-      REXML::Document.parse_stream(File.new(fname), l)
++      l = Listener.new(&block)
++      open(fname) { |fh|
++        REXML::Document.parse_stream(fh, l)
++      }
+       l.result
+     end
+   end
++  
+ end
