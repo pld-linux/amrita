@@ -3,7 +3,7 @@
 Summary:	An HTML/XHTML template library for Ruby
 Name:		amrita
 Version:	1.8.2
-Release:	1
+Release:	2
 License:	GPL
 URL:		http://www.brain-tokyo.jp/research/amrita/
 Group:		Development/Libraries
@@ -22,6 +22,7 @@ An HTML/XHTML template library for Ruby
 %build
 ruby install.rb config --site-ruby=%{ruby_rubylibdir} --so-dir=%{ruby_archdir}
 ruby install.rb setup
+rdoc lib docs
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -30,6 +31,7 @@ ruby install.rb install --prefix=$RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc doc/
 %attr(755,root,root) %{_bindir}/ams
 %attr(755,root,root) %{_bindir}/amx
 %attr(755,root,root) %{_bindir}/amshandler
