@@ -29,8 +29,7 @@ ruby install.rb config \
 	--site-ruby=%{ruby_rubylibdir} \
 	--so-dir=%{ruby_archdir}
 
-ruby install.rb setup
-rdoc lib docs
+ruby install.rb setup 
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -43,7 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc
+%doc ChangeLog docs README RELEASENOTE sample
+%lang(ja) %doc README_ja
 %attr(755,root,root) %{_bindir}/ams
 %attr(755,root,root) %{_bindir}/amx
 %attr(755,root,root) %{_bindir}/amshandler
