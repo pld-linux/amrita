@@ -4,7 +4,7 @@ Summary:	An HTML/XHTML template library for Ruby
 Summary(pl):	Biblioteka szablonów HTML/XHTML dla jêzyka Ruby
 Name:		amrita
 Version:	1.8.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Libraries
 Source0:	http://www.brain-tokyo.jp/research/amrita/%{name}-%{version}.tar.gz
@@ -30,7 +30,14 @@ ruby install.rb config \
 	--so-dir=%{ruby_archdir}
 
 ruby install.rb setup 
-rdoc docs README -o rdoc
+
+rdoc --op rdoc -S --main README README docs/QuickStart  docs/Tour docs/Tour2 docs/XML docs/Cgi lib/amrita README_ja docs/QuickStart_ja docs/Tour_ja docs/XML_ja docs/Tour2_ja docs/Cgi_ja
+cd rdoc/files/
+ruby -i.back -ne 'print gsub("iso-8859-1", "EUC-JP") unless /<?xml/' *ja.html
+cd ../../
+cd rdoc/files/docs/
+ruby -i.back -ne 'print gsub("iso-8859-1", "EUC-JP") unless /<?xml/' *ja.html
+cd ../../
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -43,8 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog docs README RELEASENOTE sample rdoc
-%lang(ja) %doc README_ja
+%doc ChangeLog RELEASENOTE sample rdoc/*
 %attr(755,root,root) %{_bindir}/ams
 %attr(755,root,root) %{_bindir}/amx
 %attr(755,root,root) %{_bindir}/amshandler
