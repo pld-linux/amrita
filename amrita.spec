@@ -30,6 +30,7 @@ ruby install.rb config \
 	--so-dir=%{ruby_archdir}
 
 ruby install.rb setup 
+rdoc docs README -o rdoc
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -42,7 +43,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog docs README RELEASENOTE sample
+%doc ChangeLog docs README RELEASENOTE sample rdoc
 %lang(ja) %doc README_ja
 %attr(755,root,root) %{_bindir}/ams
 %attr(755,root,root) %{_bindir}/amx
