@@ -12,8 +12,8 @@ Source1:	setup.rb
 Patch0:		%{name}-rexml.patch
 Patch1:		%{name}-xml-fubar.patch
 URL:		http://www.brain-tokyo.jp/research/amrita/
-BuildRequires:	ruby
 BuildRequires:	rpmbuild(macros) >= 1.272
+BuildRequires:	ruby
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,7 +33,7 @@ ruby setup.rb config \
 	--rbdir=%{ruby_rubylibdir} \
 	--sodir=%{ruby_archdir}
 
-ruby setup.rb setup 
+ruby setup.rb setup
 
 rdoc --op rdoc -S --main README README docs/QuickStart  docs/Tour docs/Tour2 docs/XML docs/Cgi lib/amrita README_ja docs/QuickStart_ja docs/Tour_ja docs/XML_ja docs/Tour2_ja docs/Cgi_ja
 cd rdoc/files/
