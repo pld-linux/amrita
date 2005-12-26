@@ -1,5 +1,3 @@
-%define		ruby_archdir	%(ruby -r rbconfig -e 'print Config::CONFIG["archdir"]')
-%define		ruby_rubylibdir	%(ruby -r rbconfig -e 'print Config::CONFIG["rubylibdir"]')
 Summary:	An HTML/XHTML template library for Ruby
 Summary(pl):	Biblioteka szablonów HTML/XHTML dla jêzyka Ruby
 Name:		amrita
@@ -11,10 +9,11 @@ Group:		Development/Libraries
 Source0:	http://osdn.dl.sourceforge.jp/amrita/10939/%{name}-%{version}.tar.gz
 # Source0-md5:	903af244f72d1a4b83f2cb8cfeecbac7
 Source1:	setup.rb
-Patch0:	%{name}-rexml.patch
-Patch1: %{name}-xml-fubar.patch
+Patch0:		%{name}-rexml.patch
+Patch1:		%{name}-xml-fubar.patch
 URL:		http://www.brain-tokyo.jp/research/amrita/
 BuildRequires:	ruby
+BuildRequires:	rpmbuild(macros) >= 1.272
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
