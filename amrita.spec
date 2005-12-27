@@ -2,7 +2,7 @@ Summary:	An HTML/XHTML template library for Ruby
 Summary(pl):	Biblioteka szablonów HTML/XHTML dla jêzyka Ruby
 Name:		amrita
 Version:	1.0.2
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		Development/Libraries
@@ -13,7 +13,7 @@ Patch0:		%{name}-rexml.patch
 Patch1:		%{name}-xml-fubar.patch
 URL:		http://www.brain-tokyo.jp/research/amrita/
 BuildRequires:	rpmbuild(macros) >= 1.272
-BuildRequires:	ruby
+BuildRequires:	ruby-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
