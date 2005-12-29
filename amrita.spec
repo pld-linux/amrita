@@ -12,8 +12,9 @@ Source1:	setup.rb
 Patch0:		%{name}-rexml.patch
 Patch1:		%{name}-xml-fubar.patch
 URL:		http://www.brain-tokyo.jp/research/amrita/
-BuildRequires:	rpmbuild(macros) >= 1.272
+BuildRequires:	rpmbuild(macros) >= 1.277
 BuildRequires:	ruby-modules
+%ruby_mod_ver_requires_eq
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
